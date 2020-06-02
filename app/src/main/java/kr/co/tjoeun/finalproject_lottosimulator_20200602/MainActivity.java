@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,6 +24,23 @@ public class MainActivity extends BaseActivity {
     int bonusNum = 0;
 
     List<TextView> winNumTxts = new ArrayList<>();
+
+    Handler mHandler = new Handler();
+    Runnable buyLottoRunnalbe = new Runnable() {
+        @Override
+        public void run() {
+            if(useMoney < 10000000) {
+                makeLottoWinNum();
+                checkWinRank();
+                mHandler.post(buyLottoRunnalbe);
+            }
+            else {
+                Toast.makeText(mContext, "로또 구매를 종료합니다.", Toast.LENGTH_SHORT).show();
+            }
+
+
+        }
+    };
 
     long useMoney = 0L;
     long winMoney = 0L;
@@ -54,15 +73,7 @@ public class MainActivity extends BaseActivity {
 
 
 
-                while(true) {
-
-                    makeLottoWinNum();
-                    checkWinRank();
-
-                    if(useMoney > 10000000) {
-                        break;
-                    }
-                }
+                mHandler.post(buyLottoRunnalbe);
 
             }
         });
