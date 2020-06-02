@@ -48,6 +48,25 @@ public class MainActivity extends BaseActivity {
     @Override
     public void setupEvent() {
 
+        binding.buyAutoLottoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+                while(true) {
+
+                    makeLottoWinNum();
+                    checkWinRank();
+
+                    if(useMoney > 10000000) {
+                        break;
+                    }
+                }
+
+            }
+        });
+
         binding.buyOneLottoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
